@@ -164,6 +164,31 @@ namespace WebApp.Controllers
             return tbr;
         }
 
+        [Route("TicketCheck")]
+        [Authorize(Roles = "Controller")]
+        public TicketCheckReturn TicketCheck(TicketCheckDTO ticketToCheck)
+        {
+            Ticket ticket = uow.TicketRepository.Get(ticketToCheck.TicketId);
+            if (ticket == null)
+            {
+                return new TicketCheckReturn() { IsValid = false, Message = "No such ticket" };
+            }
+            if (ticket.AnonymousCustomerId != null && ticket.AnonymousCustomerId.Length > 0 &&
+                ticket.AnonymousCustomerId != ticketToCheck.AnonymousCustomerId)
+            {
+                return new TicketCheckReturn() { IsValid = false, Message = "Bad AnonymousCustomerId", Ticket = ticket };
+            }
+            if (ticket.CheckinTime == null)
+            {
+                return new TicketCheckReturn() { IsValid = false, Message = "Not checked in", Ticket = ticket };
+            }
+            if (ticket.IsExpired)
+            {
+                return new TicketCheckReturn() { IsValid = false, Message = "Ticket expired", Ticket = ticket };
+            }
+            return new TicketCheckReturn() { IsValid = true, Ticket = ticket };
+        }
+
         private Customer GetCustomer()
         {
             return CustomerController.GetCustomer(RequestContext, uow);
