@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../user'
+import { LoginModel } from '../models/login-model'
 import { Router } from "@angular/router"
 import { UserService } from '../user.service'
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,9 @@ import { UserService } from '../user.service'
 })
 export class LoginComponent implements OnInit {
 
-  user : User = new User();
+  user : LoginModel = new LoginModel();
+
+  errMsg : string;
 
   constructor(private router : Router, private userService : UserService) { }
 
@@ -18,9 +21,14 @@ export class LoginComponent implements OnInit {
   }
 
   login() : void {
-    if(this.userService.login(this.user)){
-      this.router.navigate(['/home']);
-    }
+    this.userService.login(this.user).subscribe(aaa => {
+      if(aaa instanceof HttpErrorResponse){
+        this.errMsg = "Failed to login";
+      }
+      else{
+        this.router.navigate(['/home']);
+      }
+    });
   }
 
 }

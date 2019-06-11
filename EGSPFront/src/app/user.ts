@@ -1,5 +1,4 @@
 export class User {
-    email: string;
-    username: string;
-    passworld: string;
+    Email: string;
+    token: string;
 }

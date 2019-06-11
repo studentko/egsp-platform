@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../user'
+import { RegisterModel } from '../models/register-model'
 import { Router } from "@angular/router"
 import { UserService } from '../user.service'
 
@@ -10,7 +10,9 @@ import { UserService } from '../user.service'
 })
 export class RegisterComponent implements OnInit {
 
-  user : User = new User();
+  user : RegisterModel = new RegisterModel();
+
+  errMsg : string;
 
   constructor(private router : Router, private userService : UserService) { }
 
@@ -18,9 +20,14 @@ export class RegisterComponent implements OnInit {
   }
 
   register() : void {
-    if(this.userService.register(this.user)){
-      this.router.navigate(['/home']);
-    }
+    this.userService.register(this.user).subscribe(aaa =>{
+      if(aaa === null) {
+        this.router.navigate(['/home']);
+      }
+      else{
+        this.errMsg = "Failed to register";
+      }
+    })
   }
 
 }

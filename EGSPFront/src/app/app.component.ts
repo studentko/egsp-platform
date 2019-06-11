@@ -13,7 +13,7 @@ export class AppComponent {
   constructor(private userService : UserService) {}
 
   logout() : void {
-    this.userService.activeUser.email = "123";
+    this.userService.activeUser.Email = "123";
     this.userService.logout();
   }
 }
