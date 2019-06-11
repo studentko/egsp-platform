@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Unity;
 using Unity.Lifetime;
@@ -22,6 +23,8 @@ namespace WebApp
             config.DependencyResolver = resolver;
 
             GlobalHost.DependencyResolver = new SignalRUnityDependencyResolver(container);
+
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.Re‌​ferenceLoopHandling = ReferenceLoopHandling.Ignore;
 
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.

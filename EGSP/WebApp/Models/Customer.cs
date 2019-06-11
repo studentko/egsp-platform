@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -27,7 +28,7 @@ namespace WebApp.Models
         [ForeignKey("CustomerType")]
         public int CustomerTypeId { get; set; }
 
-        public CustomerType CustomerType { get; set; }
+        public virtual CustomerType CustomerType { get; set; }
 
         [Required]
         public bool Approoved { get; set; }
@@ -40,6 +41,9 @@ namespace WebApp.Models
 
         [Required]
         public string Email { get; set; }
+
+        [JsonIgnore]
+        public virtual List<Ticket> Tickets { get; set; }
 
     }
 }

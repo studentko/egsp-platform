@@ -72,6 +72,7 @@ namespace WebApp.App_Start
             container.RegisterType<IUnitOfWork, DemoUnitOfWork>();
             container.RegisterType<ICustomerTypeRepository, CustomerTypeRepository>();
             container.RegisterType<ICustomerRepository, CustomerRepository>();
+            container.RegisterType<ITicketRepository, TicketRepository>();
         }
 
         public void Dispose()
