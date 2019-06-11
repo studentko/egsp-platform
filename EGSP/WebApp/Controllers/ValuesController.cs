@@ -21,6 +21,7 @@ namespace WebApp.Controllers
         {
             var userName = this.RequestContext.Principal.Identity.Name;
             return String.Format("Hello, {0}.", userName);
+            
         }
 
         // GET api/values/5

@@ -38,5 +38,8 @@ namespace WebApp.Models
         [ForeignKey("ApplicationUser")]
         public string ApplicationUserId { get; set; }
 
+        [Required]
+        public string Email { get; set; }
+
     }
 }

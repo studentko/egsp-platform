@@ -14,6 +14,8 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using WebApp.Models;
+using WebApp.Persistence;
+using WebApp.Persistence.UnitOfWork;
 using WebApp.Providers;
 using WebApp.Results;
 
@@ -25,6 +27,9 @@ namespace WebApp.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+
+        IDemoUnitOfWork uow = new DemoUnitOfWork(new ApplicationDbContext());
+
 
         public AccountController()
         {
@@ -332,6 +337,32 @@ namespace WebApp.Controllers
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
+            if (result.Succeeded)
+            {
+                Customer customer = new Customer()
+                {
+                    Name = model.Name,
+                    LastName = model.LastName,
+                    Address = model.Address,
+                    Approoved = false,
+                    Birthday = model.Birthday,
+                    CustomerTypeId = model.CustomerTypeId,
+                    ApplicationUserId = user.Id,
+                    Email = model.Email
+                };
+
+                try
+                {
+                    uow.CustomerRepository.Add(customer);
+                    uow.Complete();
+                } catch (Exception e)
+                {
+                    Console.WriteLine(e.Message + e.StackTrace);
+                    result = await UserManager.DeleteAsync(user);
+                    return BadRequest("Couldn't create user, check your data");
+                }
+
+            }
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
