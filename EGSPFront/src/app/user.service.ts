@@ -55,6 +55,10 @@ export class UserService {
     );
   }
 
+  getCustomerTypes() : Observable<any> {
+    return this.httpClient.get<any>('http://localhost:52295/api/Customer/CustomerTypes', {headers: this.lHeaders});
+  }
+
   //TODO add http request
   logout() : boolean {
     if(this.activeUser){
