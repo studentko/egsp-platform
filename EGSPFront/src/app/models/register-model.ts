@@ -5,6 +5,6 @@ export class RegisterModel {
     Name : string;
     LastName : string;
     Birthday : Date;
-    Adress : string;
-    CustomerTypeId : number;
+    Address : string;
+    CustomerTypeId : number = 1;
 }

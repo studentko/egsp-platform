@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../user'
+import { RegisterModel } from '../models/register-model'
 import { Router } from "@angular/router"
 import { UserService } from '../user.service'
-import { RegisterModel } from '../models/register-model'
 
 @Component({
   selector: 'app-register',
@@ -11,8 +10,10 @@ import { RegisterModel } from '../models/register-model'
 })
 export class RegisterComponent implements OnInit {
 
-  user = new RegisterModel();
+  user : RegisterModel = new RegisterModel();
   types = [];
+
+  errMsg : string;
 
   constructor(private router : Router, private userService : UserService) { }
 
@@ -21,8 +22,14 @@ export class RegisterComponent implements OnInit {
   }
 
   register() : void {
-    this.userService.register(this.user);
-      //this.router.navigate(['/home']);
+    this.userService.register(this.user).subscribe(aaa =>{
+      if(aaa === null) {
+        this.router.navigate(['/home']);
+      }
+      else{
+        this.errMsg = "Failed to register";
+      }
+    })
   }
 
   getTypes() : void {

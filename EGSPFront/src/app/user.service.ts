@@ -13,14 +13,21 @@ export class UserService {
 
   activeUser : User;
 
-  lHeaders = new HttpHeaders();
+  tokenHeader = new HttpHeaders();
 
   constructor(private httpClient : HttpClient) { 
-    let temp = sessionStorage.getItem('user');
-    if(temp){
-      this.activeUser = JSON.parse(temp);
-      this.lHeaders.append("Authorization", this.activeUser.token);
+    let token = sessionStorage.getItem('token');
+    if(token){
+      this.activeUser = new User();
+      this.activeUser.token = token;
+      this.tokenHeader = this.tokenHeader.append("Authorization", this.activeUser.token);
+      this.getUserInfo();
     }
+  }
+
+  getUserInfo() : void {
+    this.httpClient.get<any>('http://localhost:52295/api/Account/UserInfo', {headers: this.tokenHeader})
+    .subscribe(data => this.activeUser.Email = data.Email);
   }
 
   register(userData: RegisterModel) : Observable<any> {
@@ -45,9 +52,9 @@ export class UserService {
         this.activeUser = new User();
         this.activeUser.Email = userData.Email;
         this.activeUser.token = "Bearer " + res.access_token;
-        sessionStorage.setItem('user', JSON.stringify(this.activeUser));
-        this.lHeaders.delete("Authorization");
-        this.lHeaders.append("Authorization", this.activeUser.token);
+        sessionStorage.setItem('token', this.activeUser.token);
+        this.tokenHeader.delete("Authorization");
+        this.tokenHeader.append("Authorization", this.activeUser.token);
       }),
       catchError((err : HttpErrorResponse) => {
         return of(err);
@@ -56,7 +63,7 @@ export class UserService {
   }
 
   getCustomerTypes() : Observable<any> {
-    return this.httpClient.get<any>('http://localhost:52295/api/Customer/CustomerTypes', {headers: this.lHeaders});
+    return this.httpClient.get<any>('http://localhost:52295/api/Customer/CustomerTypes', {headers: this.tokenHeader});
   }
 
   //TODO add http request
