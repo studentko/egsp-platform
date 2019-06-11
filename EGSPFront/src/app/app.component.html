@@ -1,0 +1,14 @@
+<nav>
+  <a routerLink='/home'>Home</a>
+  <div *ngIf="!userService.activeUser; else logout">
+    <a style="float:right" routerLink='/register'>Register</a>
+    <a style="float:right" routerLink='/login'>Login</a>
+  </div>
+  <ng-template #logout>
+    <a style="float:right">{{userService.activeUser.email}}</a>
+  </ng-template>
+</nav>
+
+<div id="main">
+  <router-outlet></router-outlet>
+</div>
