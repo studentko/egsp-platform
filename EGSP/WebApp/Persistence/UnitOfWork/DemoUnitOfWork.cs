@@ -8,13 +8,40 @@ using WebApp.Persistence.Repository;
 
 namespace WebApp.Persistence.UnitOfWork
 {
-    public class DemoUnitOfWork : IUnitOfWork
+    public class DemoUnitOfWork : IUnitOfWork, IDemoUnitOfWork
     {
         private readonly DbContext _context;
+
+        private ICustomerRepository customerRepository;
+        private ICustomerTypeRepository customerTypeRepository;
       
         public DemoUnitOfWork(DbContext context)
         {
             _context = context;
+        }
+
+        public ICustomerRepository CustomerRepository
+        {
+            get
+            {
+                if (customerRepository == null)
+                {
+                    customerRepository = new CustomerRepository(_context);
+                }
+                return customerRepository;
+            }
+        }
+
+        public ICustomerTypeRepository CustomerTypeRepository
+        {
+            get
+            {
+                if (customerTypeRepository == null)
+                {
+                    customerTypeRepository = new CustomerTypeRepository(_context);
+                }
+                return customerTypeRepository;
+            }
         }
 
         public int Complete()
