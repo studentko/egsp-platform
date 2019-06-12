@@ -256,6 +256,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DTO\AnonymousCheckinDTO.cs" />
     <Compile Include="DTO\BusStationDataDTO.cs" />
     <Compile Include="DTO\CustomerUpdateDTO.cs" />
     <Compile Include="DTO\TicketBuyReturn.cs" />

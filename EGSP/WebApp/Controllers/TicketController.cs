@@ -86,6 +86,28 @@ namespace WebApp.Controllers
             return new TicketCheckinReturn() { IsSuccess = true };
         }
 
+        [Route("AnonymousCheckin/{id}")]
+        [HttpPut]
+        [AllowAnonymous]
+        public TicketCheckinReturn Checkin(int id, AnonymousCheckinDTO acd)
+        {
+            Ticket ticket = uow.TicketRepository.Get(id);
+            if (ticket == null || ticket.AnonymousCustomerId == null || ticket.AnonymousCustomerId != acd.AnonymousCustomerId)
+            {
+                return new TicketCheckinReturn("No such ticket");
+            }
+
+            if (ticket.CheckinTime != null)
+            {
+                return new TicketCheckinReturn("Ticket allready checked");
+            }
+
+            ticket.CheckinTime = DateTime.Now;
+            uow.Complete();
+
+            return new TicketCheckinReturn() { IsSuccess = true };
+        }
+
         [HttpGet]
         [AllowAnonymous]
         [Route("TicketTypes")]
@@ -102,6 +124,44 @@ namespace WebApp.Controllers
             }
 
             return cardTypes;
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("BuyAnonymous")]
+        public TicketBuyReturn BuyAnonymousTicket(TicketPurchaseData tpd)
+        {
+            TicketBuyReturn tbr = new TicketBuyReturn();
+
+            if (RequestContext.Principal.Identity.IsAuthenticated)
+            {
+                tbr.IsSuccess = false;
+                tbr.ErrorMessage = "Allowed only for anonymous users";
+                return tbr;
+            }
+
+            if (!ProcessPayment(tpd))
+            {
+                tbr.IsSuccess = false;
+                tbr.ErrorMessage = "No more money on your card";
+                return tbr;
+            }
+
+            Ticket ticket = new Ticket()
+            {
+                PurchaseTime = DateTime.Now,
+                TicketType = tpd.TicketType,
+                AnonymousCustomerId = Guid.NewGuid().ToString()
+            };
+
+            uow.TicketRepository.Add(ticket);
+            uow.Complete();
+
+            tbr.Ticket = ticket;
+            tbr.IsSuccess = true;
+            tbr.ErrorMessage = null;
+
+            return tbr;
         }
 
         private Customer GetCustomer()
