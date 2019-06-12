@@ -83,7 +83,7 @@ namespace WebApp.Controllers
             ticket.CheckinTime = DateTime.Now;
             uow.Complete();
 
-            return new TicketCheckinReturn() { IsSuccess = true };
+            return new TicketCheckinReturn() { IsSuccess = true, Ticket = ticket };
         }
 
         [Route("AnonymousCheckin/{id}")]
@@ -105,7 +105,7 @@ namespace WebApp.Controllers
             ticket.CheckinTime = DateTime.Now;
             uow.Complete();
 
-            return new TicketCheckinReturn() { IsSuccess = true };
+            return new TicketCheckinReturn() { IsSuccess = true , Ticket = ticket};
         }
 
         [HttpGet]

@@ -27,7 +27,6 @@ export class TicketBuyingComponent implements OnInit {
     this.ticketService.buyTicket(type).subscribe(
       data =>{
         if(data.IsSuccess){
-          this.ticketService.getPurchasedTickets().subscribe();
           this.errMsg = null;
         }
         else{

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApp.Models;
 
 namespace WebApp.DTO
 {
@@ -9,6 +10,7 @@ namespace WebApp.DTO
     {
         public bool IsSuccess { get; set; }
         public string ErrorMessage { get; set; }
+        public Ticket Ticket { get; set; }
 
         public TicketCheckinReturn()
         {
