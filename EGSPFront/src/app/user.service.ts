@@ -26,8 +26,8 @@ export class UserService {
   }
 
   getUserInfo() : void {
-    this.httpClient.get<any>('http://localhost:52295/api/Account/UserInfo', {headers: this.tokenHeader})
-    .subscribe(data => this.activeUser.Email = data.Email);
+    this.httpClient.get<any>('http://localhost:52295/api/Customer', {headers: this.tokenHeader})
+    .subscribe(data => Object.assign(this.activeUser, data));
   }
 
   register(userData: RegisterModel) : Observable<any> {
