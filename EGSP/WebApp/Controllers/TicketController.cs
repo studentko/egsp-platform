@@ -86,6 +86,24 @@ namespace WebApp.Controllers
             return new TicketCheckinReturn() { IsSuccess = true };
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("TicketTypes")]
+        public IEnumerable<string> GetTicketTypes()
+        {
+            List<string> cardTypes = new List<string>();
+            cardTypes.Add(TicketType.OneHour.ToString());
+
+            if(RequestContext.Principal.Identity.IsAuthenticated)
+            {
+                cardTypes.Add(TicketType.Daily.ToString());
+                cardTypes.Add(TicketType.Monthly.ToString());
+                cardTypes.Add(TicketType.Yearly.ToString());
+            }
+
+            return cardTypes;
+        }
+
         private Customer GetCustomer()
         {
             return CustomerController.GetCustomer(RequestContext, uow);
