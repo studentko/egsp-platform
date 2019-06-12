@@ -21,8 +21,11 @@ export class TicketService {
 
   buyTicket(type: string) : Observable<any> {
     if(this.userService.isLoggedIn()){
-    return this.httpClient.post<any>('http://localhost:52295/api/Ticket/Buy', 
-    {TicketType: type}, {headers: this.userService.tokenHeader} );
+      return this.httpClient.post<any>('http://localhost:52295/api/Ticket/Buy', 
+      {TicketType: type}, {headers: this.userService.tokenHeader} );
+    }
+    else{
+      return of({IsSuccess: false, ErrorMessage: "Nij gotovo"});
     }
   }
 
@@ -32,6 +35,9 @@ export class TicketService {
       .pipe(
         tap(data => this.tickets = data)
       );
+    }
+    else{
+      return of([]);
     }
   }
 }

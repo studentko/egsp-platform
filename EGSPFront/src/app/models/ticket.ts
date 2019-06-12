@@ -2,6 +2,7 @@ export class Ticket {
     Id: number;
     PurchaseTime: Date;
     CheckinTime: Date;
-    TicketType: string;
+    TicketType: number;
+    TicketTypeString: string;
     AnonymousCustomerId: string;
 }

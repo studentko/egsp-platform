@@ -3,7 +3,7 @@
   <div class="col-sm-2" *ngFor='let ticket of ticketService.tickets'>
     <div class="card mb-3" style="width: 15rem">
       <div class="card-body">
-        <h5 class="card-title">{{ticket.TicketType}}</h5>
+        <h5 class="card-title">{{ticket.TicketTypeString}}</h5>
         <p class="card-text">Purchased:<br/> {{ticket.PurchaseTime}}</p>
         <a class="btn btn-primary">Check</a>
       </div>
