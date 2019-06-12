@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TicketBuyingComponent } from '../ticket-buying/ticket-buying.component'
 
 @Component({
   selector: 'app-home',

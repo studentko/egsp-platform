@@ -1,0 +1,20 @@
+<h2>Available Tickets:</h2>
+<div class="row">
+  <div class="col-sm-2" *ngFor='let ticket of ticketService.tickets'>
+    <div class="card mb-3" style="width: 15rem">
+      <div class="card-body">
+        <h5 class="card-title">{{ticket.TicketTypeString}}</h5>
+        <p class="card-text">Purchased:<br/> {{ticket.PurchaseTime  | date:'short' }}<br/>
+          <span *ngIf="ticket.CheckinTime">
+            Checked:<br/> {{ticket.CheckinTime | date:'short' }}
+          </span>
+        </p>
+        <a class="btn btn-primary" (click)="checkIn(ticket)">Check</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf='errMsg' class="alert alert-danger">
+  {{errMsg}}
+</div>
