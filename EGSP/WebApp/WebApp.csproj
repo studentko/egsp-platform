@@ -265,6 +265,10 @@
     <Compile Include="Migrations\201905222056072_InitialMigration.Designer.cs">
       <DependentUpon>201905222056072_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906101503515_CustomerAdded.cs" />
+    <Compile Include="Migrations\201906101503515_CustomerAdded.Designer.cs">
+      <DependentUpon>201906101503515_CustomerAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201906110847418_EmailInCustomer.cs" />
     <Compile Include="Migrations\201906110847418_EmailInCustomer.Designer.cs">
       <DependentUpon>201906110847418_EmailInCustomer.cs</DependentUpon>
@@ -396,6 +400,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201905222056072_InitialMigration.resx">
       <DependentUpon>201905222056072_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906101503515_CustomerAdded.resx">
+      <DependentUpon>201906101503515_CustomerAdded.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906110847418_EmailInCustomer.resx">
       <DependentUpon>201906110847418_EmailInCustomer.cs</DependentUpon>
