@@ -52,6 +52,12 @@
       <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.6.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.4.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
     </Reference>
@@ -91,6 +97,9 @@
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Spatial, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.6.0\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.7\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
@@ -107,6 +116,9 @@
     </Reference>
     <Reference Include="System.Web.Http.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.7\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.OData, Version=5.3.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.5.3.1\lib\net45\System.Web.Http.OData.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
@@ -253,12 +265,15 @@
     <Compile Include="Controllers\BusLineController.cs" />
     <Compile Include="Controllers\BusStationController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\DepartureTableController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DTO\AnonymousCheckinDTO.cs" />
+    <Compile Include="DTO\BusLineDataDTO.cs" />
     <Compile Include="DTO\BusStationDataDTO.cs" />
     <Compile Include="DTO\CustomerUpdateDTO.cs" />
+    <Compile Include="DTO\DepartureTableDTO.cs" />
     <Compile Include="DTO\TicketBuyReturn.cs" />
     <Compile Include="DTO\TicketCheckinReturn.cs" />
     <Compile Include="DTO\TicketPurchaseData.cs" />
@@ -285,6 +300,10 @@
     <Compile Include="Migrations\201906111703259_BusLinesAndStations.Designer.cs">
       <DependentUpon>201906111703259_BusLinesAndStations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906121539554_DepartureTable.cs" />
+    <Compile Include="Migrations\201906121539554_DepartureTable.Designer.cs">
+      <DependentUpon>201906121539554_DepartureTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -293,16 +312,19 @@
     <Compile Include="Models\BusStation.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerType.cs" />
+    <Compile Include="Models\DepartureTable.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Persistence\Repository\BusLineRepository.cs" />
     <Compile Include="Persistence\Repository\BusStationRepository.cs" />
     <Compile Include="Persistence\Repository\CustomerRepository.cs" />
     <Compile Include="Persistence\Repository\CustomerTypeRepository.cs" />
+    <Compile Include="Persistence\Repository\DepartureRepository.cs" />
     <Compile Include="Persistence\Repository\IBusLineRepository.cs" />
     <Compile Include="Persistence\Repository\IBusStationRepository.cs" />
     <Compile Include="Persistence\Repository\ICustomerRepository.cs" />
     <Compile Include="Persistence\Repository\ICustomerTypeRepository.cs" />
+    <Compile Include="Persistence\Repository\IDepratureRepository.cs" />
     <Compile Include="Persistence\Repository\IRepository.cs" />
     <Compile Include="Persistence\Repository\ITicketRepository.cs" />
     <Compile Include="Persistence\Repository\Repository.cs" />
@@ -426,6 +448,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906111703259_BusLinesAndStations.resx">
       <DependentUpon>201906111703259_BusLinesAndStations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906121539554_DepartureTable.resx">
+      <DependentUpon>201906121539554_DepartureTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

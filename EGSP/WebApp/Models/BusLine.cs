@@ -15,7 +15,7 @@ namespace WebApp.Models
         [Index("IX_Linenumber", IsUnique = true)]
         public string LineNumber { get; set; }
 
-        public IList<BusStation> BusStations { get; set; }
+        public virtual IList<BusStation> BusStations { get; set; }
 
 
     }

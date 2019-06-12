@@ -9,6 +9,7 @@ namespace WebApp.Persistence.UnitOfWork
         ITicketRepository TicketRepository { get; }
         IBusStationRepository BusStationRepository { get; }
         IBusLineRepository BusLineRepository { get; }
+        IDepratureRepository DepartureRepository { get; }
 
         int Complete();
         void Dispose();

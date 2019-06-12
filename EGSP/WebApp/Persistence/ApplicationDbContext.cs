@@ -17,6 +17,7 @@ namespace WebApp.Persistence
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<BusStation> BusStations { get; set; }
         public DbSet<BusLine> BusLines { get; set; }
+        public DbSet<DepartureTable> DepartureTables { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
