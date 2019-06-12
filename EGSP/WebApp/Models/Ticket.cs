@@ -17,6 +17,15 @@ namespace WebApp.Models
 
         public TicketType TicketType { get; set; }
 
+        [NotMapped]
+        public string TicketTypeString
+        {
+            get
+            {
+                return TicketType.ToString();
+            }
+        }
+
         [ForeignKey("Customer")]
         public int? CustomerId { get; set; }
 
