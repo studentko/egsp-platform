@@ -9,6 +9,8 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { TicketBuyingComponent } from './ticket-buying/ticket-buying.component';
+import { TicketsComponent } from './tickets/tickets.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    AccountSettingsComponent
+    AccountSettingsComponent,
+    TicketBuyingComponent,
+    TicketsComponent
   ],
   imports: [
     BrowserModule,

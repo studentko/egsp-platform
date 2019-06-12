@@ -1,0 +1,19 @@
+<h2>Buy Tickets:</h2>
+<div class="row">
+  <div class="col-sm-1" *ngFor='let ticket of ticketTypes'>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ticket}}</h5>
+        <a class="btn btn-primary" (click)="buyTicket(ticket)">Buy</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf='!userService.isLoggedIn()'>
+  *Additional ticket options available for logged in users.
+</div>
+
+<div *ngIf='errMsg' class="alert alert-danger">
+  {{errMsg}}
+</div>

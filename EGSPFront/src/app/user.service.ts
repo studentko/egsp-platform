@@ -13,6 +13,10 @@ export class UserService {
 
   activeUser : User;
 
+  isLoggedIn() : boolean {
+    return this.activeUser != undefined;
+  }
+
   tokenHeader = new HttpHeaders();
 
   constructor(private httpClient : HttpClient) { 
