@@ -15,6 +15,8 @@ namespace WebApp.Persistence.UnitOfWork
         private ICustomerRepository customerRepository;
         private ICustomerTypeRepository customerTypeRepository;
         private ITicketRepository ticketRepository;
+        private IBusLineRepository busLineRepository;
+        private IBusStationRepository busStationRepository;
       
         public DemoUnitOfWork(DbContext context)
         {
@@ -54,6 +56,29 @@ namespace WebApp.Persistence.UnitOfWork
                     ticketRepository = new TicketRepository(_context);
                 }
                 return ticketRepository;
+            }
+        }
+
+        public IBusLineRepository BusLineRepository
+        {
+            get
+            {
+                if (busLineRepository == null)
+                {
+                    busLineRepository = new BusLineRepository(_context);
+                }
+                return busLineRepository;
+            }
+        }
+        public IBusStationRepository BusStationRepository
+        {
+            get
+            {
+                if (busStationRepository == null)
+                {
+                    busStationRepository = new BusStationRepository(_context);
+                }
+                return busStationRepository;
             }
         }
 
