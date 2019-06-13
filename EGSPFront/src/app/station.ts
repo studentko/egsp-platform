@@ -3,6 +3,6 @@ export class Station {
     Name: string;
     Address: string;
     Latitude: number;
-    Longtitude: number;
+    Longitude: number;
     BusLines: [];
 }

@@ -1,6 +1,6 @@
 <nav>
   <a routerLink='/home'>Home</a>
-  <a routerLink='/admin'>Admin Panel</a>
+  <a *ngIf='this.userService.isLoggedIn() && this.userService.activeUser.Role == "Admin"' routerLink='/admin'>Admin Panel</a>
   <div *ngIf="!userService.activeUser; else logout">
     <a style="float:right" routerLink='/register'>Register</a>
     <a style="float:right" routerLink='/login'>Login</a>

@@ -95,15 +95,23 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<BusLine> busLines = new List<BusLine>(busStationDTO.BusLinesId.Count);
-            foreach (var id in busStationDTO.BusLinesId)
+            List<BusLine> busLines;
+            if (busStationDTO.BusLinesId != null)
             {
-                var busLine = uow.BusLineRepository.Get(id);
-                if (busLine == null)
+                busLines = new List<BusLine>(busStationDTO.BusLinesId.Count);
+                foreach (var id in busStationDTO.BusLinesId)
                 {
-                    return BadRequest("No bus line with id: " + id);
+                    var busLine = uow.BusLineRepository.Get(id);
+                    if (busLine == null)
+                    {
+                        return BadRequest("No bus line with id: " + id);
+                    }
+                    busLines.Add(busLine);
                 }
-                busLines.Add(busLine);
+            }
+            else
+            {
+                busLines = new List<BusLine>();
             }
 
             BusStation busStation = new BusStation()

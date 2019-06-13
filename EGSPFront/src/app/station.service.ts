@@ -18,7 +18,6 @@ export class StationService {
   stations: Station[] = [];
   errMsg: string;
 
-  //TODO
   getStations(): Observable<Station[]> {
     return this.httpClient.get<Station[]>('http://localhost:52295/api/BusStation').pipe(
       tap(data => {
@@ -29,6 +28,42 @@ export class StationService {
         this.errMsg = err.message;
         this.stations = [];
         return of([]);
+      })
+    );
+  }
+
+  addStation(station: Station) : Observable<any>{
+    return this.httpClient.post<Station>('http://localhost:52295/api/BusStation', station, {headers: this.userService.tokenHeader})
+    .pipe(
+      tap(data => {
+        this.stations.push(data);
+      }),
+      catchError((err: HttpErrorResponse) => {
+        return of({IsSuccess: false, ErrorMessage: err.message});
+      })
+    );
+  }
+
+  editStation(station: Station) : Observable<any>{
+    return this.httpClient.put<Station>('http://localhost:52295/api/BusStation/' + station.Id, station, {headers: this.userService.tokenHeader})
+    .pipe(
+      tap(data => {
+        this.getStations().subscribe();
+      }),
+      catchError((err: HttpErrorResponse) => {
+        return of({IsSuccess: false, ErrorMessage: err.message});
+      })
+    );
+  }
+
+  deleteStation(stationID: number) : Observable<any> {
+    return this.httpClient.delete<any>('http://localhost:52295/api/BusStation/' + stationID, {headers: this.userService.tokenHeader})
+    .pipe(
+      tap(data => {
+        this.getStations().subscribe();
+      }),
+      catchError((err: HttpErrorResponse) => {
+        return of({IsSuccess: false, ErrorMessage: err.message});
       })
     );
   }

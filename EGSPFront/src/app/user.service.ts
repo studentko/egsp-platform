@@ -30,8 +30,19 @@ export class UserService {
   }
 
   getUserInfo() : void {
-    this.httpClient.get<any>('http://localhost:52295/api/Customer', {headers: this.tokenHeader})
-    .subscribe(data => Object.assign(this.activeUser, data));
+    this.httpClient.get<String[]>('http://localhost:52295/api/Account/Roles', {headers: this.tokenHeader})
+    .subscribe(data => {
+      if(data[0] == 'Admin'){
+        this.activeUser.Role = "Admin";
+        this.httpClient.get<any>('http://localhost:52295/api/Account/UserInfo', {headers: this.tokenHeader})
+        .subscribe(data => this.activeUser.Email = data.Email);
+      }
+      else{
+        this.activeUser.Role = "AppUser";
+        this.httpClient.get<any>('http://localhost:52295/api/Customer', {headers: this.tokenHeader})
+        .subscribe(data => Object.assign(this.activeUser, data));
+      }
+    })
   }
 
   register(userData: RegisterModel) : Observable<any> {
@@ -42,7 +53,6 @@ export class UserService {
       }));
   }
 
-  //TODO add http request
   login(userData : LoginModel) : Observable<any>  {
 
       let headers = new HttpHeaders();
@@ -71,11 +81,8 @@ export class UserService {
   }
 
   //TODO add http request
-  logout() : boolean {
-    if(this.activeUser){
-      this.activeUser = undefined;
-      return true;
-    }
-    return false;
+  logout() : void {
+    this.activeUser = null;
+    sessionStorage.clear();
   }
 }
