@@ -4,8 +4,6 @@ import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders } from '@angular
 import { catchError, tap, map } from "rxjs/operators"
 import { UserService } from './user.service'
 import { Ticket } from './models/ticket';
-import { Token } from '@angular/compiler';
-import { tick } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
