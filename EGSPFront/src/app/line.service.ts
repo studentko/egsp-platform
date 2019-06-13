@@ -14,8 +14,20 @@ export class LineService {
   constructor(private httpClient : HttpClient,
     private userService : UserService) { }
 
-  //TODO
+  lines: Line[] = [];
+  errMsg: string;
+
   getLines(): Observable<Line[]> {
-    return of([]);
+    return this.httpClient.get<Line[]>('http://localhost:52295/api/BusStation').pipe(
+      tap(data => {
+        this.errMsg = null;
+        this.lines = data;
+      }),
+      catchError((err: HttpErrorResponse) => {
+        this.errMsg = err.message;
+        this.lines = [];
+        return of([]);
+      })
+    );
   }
 }

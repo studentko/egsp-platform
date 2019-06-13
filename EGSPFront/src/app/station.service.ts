@@ -12,10 +12,24 @@ import { Station } from './station';
 export class StationService {
 
   constructor(private httpClient : HttpClient,
-    private userService : UserService) { }
+    private userService : UserService) { 
+    }
+
+  stations: Station[] = [];
+  errMsg: string;
 
   //TODO
   getStations(): Observable<Station[]> {
-    return of([]);
+    return this.httpClient.get<Station[]>('http://localhost:52295/api/BusStation').pipe(
+      tap(data => {
+        this.errMsg = null;
+        this.stations = data;
+      }),
+      catchError((err: HttpErrorResponse) => {
+        this.errMsg = err.message;
+        this.stations = [];
+        return of([]);
+      })
+    );
   }
 }

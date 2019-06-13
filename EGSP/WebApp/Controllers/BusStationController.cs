@@ -17,7 +17,7 @@ namespace WebApp.Controllers
 {
 
     [Authorize(Roles = "Admin")]
-    [RoutePrefix("api/Ticket")]
+    [RoutePrefix("api/BusStation")]
     public class BusStationController : ApiController
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
