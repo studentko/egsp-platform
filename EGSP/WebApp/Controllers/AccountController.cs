@@ -71,6 +71,27 @@ namespace WebApp.Controllers
             };
         }
 
+        [Route("Roles")]
+        public IList<string> GetRoles()
+        {
+            IList<string> Roles = new List<string>();
+
+            if (RequestContext.Principal.IsInRole("Admin"))
+            {
+                Roles.Add("Admin");
+            }
+            if (RequestContext.Principal.IsInRole("AppUser"))
+            {
+                Roles.Add("AppUser");
+            }
+            if (RequestContext.Principal.IsInRole("Controller"))
+            {
+                Roles.Add("Controller");
+            }
+
+            return Roles;
+        }
+
         // POST api/Account/Logout
         [Route("Logout")]
         public IHttpActionResult Logout()
