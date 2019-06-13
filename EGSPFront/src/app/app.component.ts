@@ -8,7 +8,7 @@ import { UserService } from './user.service'
 })
 export class AppComponent {
 
-  title = 'EGSPFront';
+  title = 'EGSP';
 
   constructor(private userService : UserService) {}
 

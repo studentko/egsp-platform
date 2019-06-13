@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Station } from '../station';
 import { StationService } from '../station.service';
+import { LineService } from '../line.service';
+import { Line } from '../line';
 
 @Component({
   selector: 'app-admin',
@@ -9,18 +11,28 @@ import { StationService } from '../station.service';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private stationService: StationService) { }
+  constructor(private stationService: StationService,
+    private lineService: LineService) { }
 
   newStation: Station = new Station();
   stationEditing: boolean;
+
+  newLine: Line = new Line();
+  lineEditing: boolean;
+  newLineStations = [];
+
   errMsg: string;
+  errMsgL: string;
 
   ngOnInit() {
     this.stationService.getStations().subscribe();
+    this.lineService.getLines().subscribe();
+    this.newLineStations = this.stationService.stations.map(x => false);
   }
 
   deleteStation(station: Station) : void {
     this.stationService.deleteStation(station.Id).subscribe();
+    this.lineService.getLines().subscribe();
   }
 
   editStation(station: Station){
@@ -47,6 +59,53 @@ export class AdminComponent implements OnInit {
         }
       );
     }
+  }
+
+  addOrEditLine() : void {
+    if(!this.lineEditing){
+      this.newLine.BusStations = [];
+      this.newLineStations.forEach((x, i) => {
+        if(x){
+          this.newLine.BusStations.push(this.stationService.stations[i]);
+        }
+      })
+      this.lineService.addLine(this.newLine).subscribe(
+        data => {
+          if(data.IsSuccess === false){
+            this.errMsgL = data.ErrorMessage;
+            this.stationService.getStations().subscribe();
+          }
+        }
+      );
+    }
+    else{
+      this.newLine.BusStations = [];
+      this.newLineStations.forEach((x, i) => {
+        if(x){
+          this.newLine.BusStations.push(this.stationService.stations[i]);
+        }
+      })
+      this.lineService.editLine(this.newLine).subscribe(
+        data => {
+          if(data.IsSuccess === false){
+            this.errMsg = data.ErrorMessage;
+            this.stationService.getStations();
+          }
+        }
+      );
+    }
+  }
+
+  deleteLine(line: Line) : void {
+    this.lineService.deleteLine(line.Id).subscribe(x => {
+      this.stationService.getStations();
+    });
+  }
+
+  editLine(line: Line){
+    this.newLine = line;
+    this.lineEditing = true;
+    this.newLineStations = this.stationService.stations.map(x => line.BusStations.find(y => x.Id === y.Id) != undefined);
   }
 
 }
