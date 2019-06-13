@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container" style="width: 50%; float: left;">
 
   <h3>Stations:</h3>
   <ul class="list-group">
@@ -52,9 +52,57 @@
 
     <button type="submit" class="btn btn-success"
       [disabled]="!stationForm.form.valid"
-      (click)="addOrEditStation(this.user)">
+      (click)="addOrEditStation()">
       <span *ngIf='!stationEditing'>Add</span>
       <span *ngIf='stationEditing'>Save</span>
+    </button>
+
+  </form>
+</div>
+
+<div class="container" style="width: 50%; float: left;">
+  <h3>Lines:</h3>
+  <ul class="list-group">
+      <li class="list-group-item" style="padding-top: 5px;" *ngFor='let lin of lineService.lines'>
+        {{lin.LineNumber}}
+        <div class="action-buttons" style="float:right">
+          <button class="btn btn-info btn-sm" (click)='editLine(lin)'>Edit</button>
+          <button class="btn btn-danger btn-sm" (click)='deleteLine(lin)'>Delete</button>
+        </div>
+        </li>
+  </ul>
+  <hr/>
+
+  <h3>
+    <span *ngIf='!lineEditing'>Add new line:</span>
+    <span *ngIf='lineEditing'>Edit line {{newLine.LineNumber}}:</span>
+  </h3>
+  <form #lineForm="ngForm">
+    <div class="form-group">
+      <label for="LineNumber">Line number</label>
+      <input type="number" class="form-control" id="LineNumber" 
+      required
+      maxlength="10"
+      [(ngModel)]='newLine.LineNumber' name='LineNumber'>
+    </div>
+
+    Stations:<br/>
+
+    <div class="form-group" *ngFor='let linStat of stationService.stations; let i = index' >
+      <input type="checkbox" class="form-check-input" id="Station{{linStat.Id}}"
+      [(ngModel)]="newLineStations[i]" name="newLineStations[{{i}}]">
+      <label class="form-check-label" for="Station{{linStat.Id}}">{{linStat.Name}}</label>
+    </div>
+
+    <div *ngIf="errMsgL" class="alert alert-danger">
+      {{errMsgL}}
+    </div>
+
+    <button type="submit" class="btn btn-success"
+      [disabled]="!lineForm.form.valid"
+      (click)="addOrEditLine()">
+      <span *ngIf='!lineEditing'>Add</span>
+      <span *ngIf='lineEditing'>Save</span>
     </button>
 
   </form>

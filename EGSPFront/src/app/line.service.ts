@@ -30,4 +30,40 @@ export class LineService {
       })
     );
   }
+
+  addLine(line: Line) : Observable<any> {
+    return this.httpClient.post<Line>('http://localhost:52295/api/BusLine', line, {headers: this.userService.tokenHeader})
+    .pipe(
+      tap(data => {
+        this.getLines().subscribe();
+      }),
+      catchError((err: HttpErrorResponse) => {
+        return of({IsSuccess: false, ErrorMessage: err.message});
+      })
+    );
+  }
+
+  editLine(line: Line) : Observable<any> {
+    return this.httpClient.put<Line>('http://localhost:52295/api/BusLine/' + line.Id, line, {headers: this.userService.tokenHeader})
+    .pipe(
+      tap(data => {
+        this.getLines().subscribe();
+      }),
+      catchError((err: HttpErrorResponse) => {
+        return of({IsSuccess: false, ErrorMessage: err.message});
+      })
+    );
+  }
+
+  deleteLine(lineID: number) : Observable<any> {
+    return this.httpClient.delete<any>('http://localhost:52295/api/BusLine/' + lineID, {headers: this.userService.tokenHeader})
+    .pipe(
+      tap(data => {
+        this.getLines().subscribe();
+      }),
+      catchError((err: HttpErrorResponse) => {
+        return of({IsSuccess: false, ErrorMessage: err.message});
+      })
+    );
+  }
 }
