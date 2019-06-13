@@ -267,6 +267,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DepartureTableController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PriceEntriesController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DTO\AnonymousCheckinDTO.cs" />
@@ -304,6 +305,14 @@
     <Compile Include="Migrations\201906121539554_DepartureTable.Designer.cs">
       <DependentUpon>201906121539554_DepartureTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906132138066_PriceEntry.cs" />
+    <Compile Include="Migrations\201906132138066_PriceEntry.Designer.cs">
+      <DependentUpon>201906132138066_PriceEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906132207354_PriceInPriceLol.cs" />
+    <Compile Include="Migrations\201906132207354_PriceInPriceLol.Designer.cs">
+      <DependentUpon>201906132207354_PriceInPriceLol.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -313,6 +322,7 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerType.cs" />
     <Compile Include="Models\DepartureTable.cs" />
+    <Compile Include="Models\PriceEntry.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Persistence\Repository\BusLineRepository.cs" />
@@ -325,8 +335,10 @@
     <Compile Include="Persistence\Repository\ICustomerRepository.cs" />
     <Compile Include="Persistence\Repository\ICustomerTypeRepository.cs" />
     <Compile Include="Persistence\Repository\IDepratureRepository.cs" />
+    <Compile Include="Persistence\Repository\IPriceEntryRepository.cs" />
     <Compile Include="Persistence\Repository\IRepository.cs" />
     <Compile Include="Persistence\Repository\ITicketRepository.cs" />
+    <Compile Include="Persistence\Repository\PriceEntryRepository.cs" />
     <Compile Include="Persistence\Repository\Repository.cs" />
     <Compile Include="Persistence\Repository\TicketRepository.cs" />
     <Compile Include="Persistence\UnitOfWork\DemoUnitOfWork.cs" />
@@ -451,6 +463,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906121539554_DepartureTable.resx">
       <DependentUpon>201906121539554_DepartureTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906132138066_PriceEntry.resx">
+      <DependentUpon>201906132138066_PriceEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906132207354_PriceInPriceLol.resx">
+      <DependentUpon>201906132207354_PriceInPriceLol.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

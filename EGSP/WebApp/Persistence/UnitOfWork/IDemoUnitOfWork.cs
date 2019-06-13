@@ -10,7 +10,7 @@ namespace WebApp.Persistence.UnitOfWork
         IBusStationRepository BusStationRepository { get; }
         IBusLineRepository BusLineRepository { get; }
         IDepratureRepository DepartureRepository { get; }
-
+        IPriceEntryRepository PriceEntryRepository { get; }
         int Complete();
         void Dispose();
     }
