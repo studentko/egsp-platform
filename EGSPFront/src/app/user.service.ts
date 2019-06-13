@@ -5,6 +5,7 @@ import { LoginModel } from "./models/login-model"
 import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders } from '@angular/common/http'
 import { catchError, tap, map } from "rxjs/operators"
 import { of, Observable } from 'rxjs';
+import { PasswordChangeModel } from './models/password-change-model';
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +79,22 @@ export class UserService {
 
   getCustomerTypes() : Observable<any> {
     return this.httpClient.get<any>('http://localhost:52295/api/Customer/CustomerTypes', {headers: this.tokenHeader});
+  }
+
+  changePassword(userData : PasswordChangeModel) : Observable<any> {
+    return this.httpClient.post('http://localhost:52295/api/Account/ChangePassword', userData, {headers: this.tokenHeader})
+    .pipe(
+      catchError((err : HttpErrorResponse) => {
+        return of(err);
+      }));
+  }
+
+  updateInfo(userData : RegisterModel) : Observable<any> {
+    return this.httpClient.put('http://localhost:52295/api/Customer', userData, {headers: this.tokenHeader})
+    .pipe(
+      catchError((err : HttpErrorResponse) => {
+        return of(err);
+      }));
   }
 
   //TODO add http request
