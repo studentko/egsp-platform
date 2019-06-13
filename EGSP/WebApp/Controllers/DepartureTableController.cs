@@ -79,6 +79,8 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            departureTable.BusLineId = departureTable.BusLine.Id;
+            departureTable.BusLine = null;
             uow.DepartureRepository.Add(departureTable);
             uow.Complete();
 

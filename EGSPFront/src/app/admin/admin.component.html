@@ -107,3 +107,63 @@
 
   </form>
 </div>
+
+<hr style="width: 100%;border-width: 0px"/>
+
+<div class="container">
+
+  <h3>Departure tables:</h3>
+  <ul class="list-group">
+      <li class="list-group-item" style="padding-top: 5px;" *ngFor='let dt of departureTableService.tables'>
+        Line: {{dt.BusLine.LineNumber}}, Day: {{dt.DayOfWeekString}}, Departures: {{dt.DepartureTimes}}
+        <div class="action-buttons" style="float:right">
+          <button class="btn btn-info btn-sm" (click)='editTable(dt)'>Edit</button>
+          <button class="btn btn-danger btn-sm" (click)='deleteTable(dt)'>Delete</button>
+        </div>
+        </li>
+  </ul>
+  <hr/>
+
+  <h3>
+    <span *ngIf='!tableEditing'>Add new departure table:</span>
+    <span *ngIf='tableEditing'>Edit departure table {{newTable.Id}}:</span>
+  </h3>
+  <form #tableForm="ngForm">
+    <div class="form-group">
+      <label for="DayOfWeek">Day of the week</label>
+      <input type="number" class="form-control" id="DayOfWeek" 
+      required
+      min="1"
+      max="7"
+      [(ngModel)]='newTable.DayOfWeek' name='DayOfWeek'>
+    </div>
+
+    <div class="form-group">
+      <label for="DepartureTimes">Departure times</label>
+      <input type="text" class="form-control" id="DepartureTimes" 
+      required
+      [(ngModel)]='newTable.DepartureTimes' name='DepartureTimes'>
+    </div>
+
+    <div class="form-group">
+      <label for="BusLine">Bus line</label>
+      <select class="form-control" id="BusLine" 
+      required
+      [(ngModel)]="newTable.BusLine"  name="BusLine">
+        <option *ngFor="let bl of lineService.lines" [ngValue]="bl">{{bl.LineNumber}}</option>
+      </select>
+    </div>
+
+    <div *ngIf="errMsgD" class="alert alert-danger">
+      {{errMsgD}}
+    </div>
+
+    <button type="submit" class="btn btn-success"
+      [disabled]="!tableForm.form.valid"
+      (click)="addOrEditTable()">
+      <span *ngIf='!tableEditing'>Add</span>
+      <span *ngIf='tableEditing'>Save</span>
+    </button>
+
+  </form>
+</div>

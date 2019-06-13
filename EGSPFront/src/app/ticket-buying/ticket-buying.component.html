@@ -10,7 +10,7 @@
   </div>
 </div>
 
-<div *ngIf='!userService.isLoggedIn()'>
+<div *ngIf='!userService.activeUser'>
   *Additional ticket options available for logged in users.
 </div>
 

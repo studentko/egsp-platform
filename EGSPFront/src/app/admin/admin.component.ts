@@ -3,6 +3,8 @@ import { Station } from '../station';
 import { StationService } from '../station.service';
 import { LineService } from '../line.service';
 import { Line } from '../line';
+import { DepartureTable } from '../departure-table';
+import { DepartureTableService } from '../departure-table.service';
 
 @Component({
   selector: 'app-admin',
@@ -12,10 +14,14 @@ import { Line } from '../line';
 export class AdminComponent implements OnInit {
 
   constructor(private stationService: StationService,
-    private lineService: LineService) { }
+    private lineService: LineService,
+    private departureTableService: DepartureTableService) { }
 
   newStation: Station = new Station();
   stationEditing: boolean;
+
+  newTable: DepartureTable = new DepartureTable();
+  tableEditing: boolean;
 
   newLine: Line = new Line();
   lineEditing: boolean;
@@ -23,11 +29,13 @@ export class AdminComponent implements OnInit {
 
   errMsg: string;
   errMsgL: string;
+  errMsgD: string;
 
   ngOnInit() {
     this.stationService.getStations().subscribe();
     this.lineService.getLines().subscribe();
     this.newLineStations = this.stationService.stations.map(x => false);
+    this.departureTableService.getTables().subscribe();
   }
 
   deleteStation(station: Station) : void {
@@ -108,4 +116,34 @@ export class AdminComponent implements OnInit {
     this.newLineStations = this.stationService.stations.map(x => line.BusStations.find(y => x.Id === y.Id) != undefined);
   }
 
+  deleteTable(table: DepartureTable) : void {
+    this.departureTableService.deleteTable(table.Id).subscribe();
+    this.lineService.getLines().subscribe();
+  }
+
+  editTable(table: DepartureTable){
+    this.newTable = table;
+    this.tableEditing = true;
+  }
+
+  addOrEditTable() : void {
+    if(!this.tableEditing){
+      this.departureTableService.addTable(this.newTable).subscribe(
+        data => {
+          if(data.IsSuccess === false){
+            this.errMsgD = data.ErrorMessage;
+          }
+        }
+      );
+    }
+    else{
+      this.departureTableService.editTable(this.newTable).subscribe(
+        data => {
+          if(data.IsSuccess === false){
+            this.errMsgD = data.ErrorMessage;
+          }
+        }
+      );
+    }
+  }
 }

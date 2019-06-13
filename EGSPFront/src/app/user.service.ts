@@ -65,11 +65,11 @@ export class UserService {
     .pipe(
       tap(res => {
         this.activeUser = new User();
-        this.activeUser.Email = userData.Email;
         this.activeUser.token = "Bearer " + res.access_token;
         sessionStorage.setItem('token', this.activeUser.token);
         this.tokenHeader.delete("Authorization");
         this.tokenHeader.append("Authorization", this.activeUser.token);
+        this.getUserInfo();
       }),
       catchError((err : HttpErrorResponse) => {
         return of(err);

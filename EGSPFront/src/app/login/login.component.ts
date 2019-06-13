@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
         this.errMsg = "Failed to login";
       }
       else{
-        this.router.navigate(['/home']);
+        window.location.href = '/home';
       }
     });
   }
