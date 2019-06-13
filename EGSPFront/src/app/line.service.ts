@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders } from '@angular
 import { catchError, tap, map } from "rxjs/operators"
 import { of, Observable } from 'rxjs';
 import { UserService } from './user.service';
+import { Line } from './line';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class LineService {
     private userService : UserService) { }
 
   //TODO
-  getLines(): Observable<any> {
+  getLines(): Observable<Line[]> {
     return of([]);
   }
 }
