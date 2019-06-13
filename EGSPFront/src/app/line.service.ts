@@ -18,7 +18,7 @@ export class LineService {
   errMsg: string;
 
   getLines(): Observable<Line[]> {
-    return this.httpClient.get<Line[]>('http://localhost:52295/api/BusStation').pipe(
+    return this.httpClient.get<Line[]>('http://localhost:52295/api/BusLine').pipe(
       tap(data => {
         this.errMsg = null;
         this.lines = data;

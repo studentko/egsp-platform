@@ -1,3 +1,27 @@
+
+<h1>Schedules and stations per line</h1>
+
 <p>
-  schedule works!
+  <select [(ngModel)]="selectedLine" (ngModelChange)="onLineSelect()" class="custom-select">
+    <option *ngFor="let line of lines" [ngValue]="line">{{line.LineNumber}}</option>
+  </select>
+
+  
 </p>
+
+
+<div *ngIf="selectedLine">
+<h3>Stations:</h3>
+  <ul>
+      <li *ngFor="let station of selectedLine.BusStations">
+          {{station.Name}} - {{station.Address}}
+      </li>
+  </ul>
+<h3>Departures:</h3>
+  <ul>
+      <li *ngFor="let table of selectedLine.DepartureTables">
+          <b>{{table.DayOfWeekString}}:</b> {{table.DepartureTimes}}
+      </li>
+  </ul>
+
+</div>
