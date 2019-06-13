@@ -53,15 +53,18 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<BusLine> busLines = new List<BusLine>(busStationDTO.BusLinesId.Count);
-            foreach (var idx in busStationDTO.BusLinesId)
+            List<BusLine> busLines = new List<BusLine>();
+            if (busStationDTO.BusLines != null)
             {
-                var busLine = uow.BusLineRepository.Get(idx);
-                if (busLine == null)
+                foreach (var line in busStationDTO.BusLines)
                 {
-                    return BadRequest("No bus line with id: " + idx);
+                    var busLine = uow.BusLineRepository.Get(line.Id);
+                    if (busLine == null)
+                    {
+                        return BadRequest("No bus line with id: " + line.Id);
+                    }
+                    busLines.Add(busLine);
                 }
-                busLines.Add(busLine);
             }
 
             BusStation busStation = uow.BusStationRepository.Get(id);
@@ -95,15 +98,18 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            List<BusLine> busLines = new List<BusLine>(busStationDTO.BusLinesId.Count);
-            foreach (var id in busStationDTO.BusLinesId)
+            List<BusLine> busLines = new List<BusLine>();
+            if (busStationDTO.BusLines != null)
             {
-                var busLine = uow.BusLineRepository.Get(id);
-                if (busLine == null)
+                foreach (var line in busStationDTO.BusLines)
                 {
-                    return BadRequest("No bus line with id: " + id);
+                    var busLine = uow.BusLineRepository.Get(line.Id);
+                    if (busLine == null)
+                    {
+                        return BadRequest("No bus line with id: " + line.Id);
+                    }
+                    busLines.Add(busLine);
                 }
-                busLines.Add(busLine);
             }
 
             BusStation busStation = new BusStation()
@@ -115,6 +121,10 @@ namespace WebApp.Controllers
             };
 
             uow.BusStationRepository.Add(busStation);
+            if(busStation.BusLines == null)
+            {
+                busStation.BusLines = new List<BusLine>();
+            }
 
             foreach (var busLine in busLines)
             {

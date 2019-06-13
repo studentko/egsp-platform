@@ -13,6 +13,13 @@ namespace WebApp.Models
 
         public DayOfWeek DayOfWeek { get; set; }
 
+        public string DayOfWeekString {
+            get
+            {
+                return DayOfWeek.ToString();
+            }
+        }
+
         [Required]
         public string DepartureTimes { get; set; }
 

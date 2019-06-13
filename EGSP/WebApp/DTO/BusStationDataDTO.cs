@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApp.Models;
 
 namespace WebApp.DTO
 {
@@ -15,6 +16,6 @@ namespace WebApp.DTO
 
         public double Longitude { get; set; }
 
-        public IList<int> BusLinesId { get; set; }
+        public IList<BusLine> BusLines { get; set; }
     }
 }

@@ -17,6 +17,8 @@ namespace WebApp.Models
 
         public virtual IList<BusStation> BusStations { get; set; }
 
+        public virtual IList<DepartureTable> DepartureTables { get; set; }
+
 
     }
 }
