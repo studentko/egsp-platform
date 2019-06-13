@@ -76,6 +76,7 @@ namespace WebApp.App_Start
             container.RegisterType<IBusLineRepository, BusLineRepository>();
             container.RegisterType<IBusStationRepository, BusStationRepository>();
             container.RegisterType<IDepratureRepository, DepartureRepository>();
+            container.RegisterType<IPriceEntryRepository, PriceEntryRepository>();
         }
 
         public void Dispose()
