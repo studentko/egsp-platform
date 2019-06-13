@@ -17,7 +17,8 @@ namespace WebApp.Persistence.UnitOfWork
         private ITicketRepository ticketRepository;
         private IBusLineRepository busLineRepository;
         private IBusStationRepository busStationRepository;
-      
+        private IDepratureRepository deparatureRepository;
+
         public DemoUnitOfWork(DbContext context)
         {
             _context = context;
@@ -79,6 +80,18 @@ namespace WebApp.Persistence.UnitOfWork
                     busStationRepository = new BusStationRepository(_context);
                 }
                 return busStationRepository;
+            }
+        }
+
+        public IDepratureRepository DepartureRepository
+        {
+            get
+            {
+                if (deparatureRepository == null)
+                {
+                    deparatureRepository = new DepartureRepository(_context);
+                }
+                return deparatureRepository;
             }
         }
 

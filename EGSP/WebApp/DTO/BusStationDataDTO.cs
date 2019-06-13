@@ -7,8 +7,6 @@ namespace WebApp.DTO
 {
     public class BusStationDataDTO
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public string Address { get; set; }

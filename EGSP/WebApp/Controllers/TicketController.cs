@@ -150,7 +150,7 @@ namespace WebApp.Controllers
             Ticket ticket = new Ticket()
             {
                 PurchaseTime = DateTime.Now,
-                TicketType = tpd.TicketType,
+                TicketType = TicketType.OneHour,
                 AnonymousCustomerId = Guid.NewGuid().ToString()
             };
 

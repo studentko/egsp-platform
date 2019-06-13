@@ -17,6 +17,6 @@ namespace WebApp.Models
 
         public double Longitude { get; set; }
 
-        public IList<BusLine> BusLines { get; set; }
+        public virtual IList<BusLine> BusLines { get; set; }
     }
 }

@@ -15,12 +15,16 @@ using WebApp.Persistence.UnitOfWork;
 
 namespace WebApp.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
+    [RoutePrefix("api/Ticket")]
     public class BusStationController : ApiController
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
         IDemoUnitOfWork uow = new DemoUnitOfWork(new ApplicationDbContext());
 
         // GET: api/BusStation
+        [AllowAnonymous]
         public IEnumerable<BusStation> GetBusStations()
         {
             return uow.BusStationRepository.GetAll();
@@ -28,6 +32,7 @@ namespace WebApp.Controllers
 
         // GET: api/BusStation/5
         [ResponseType(typeof(BusStation))]
+        [AllowAnonymous]
         public IHttpActionResult GetBusStation(int id)
         {
             BusStation busStation = uow.BusStationRepository.Get(id);
@@ -40,39 +45,46 @@ namespace WebApp.Controllers
         }
 
         // PUT: api/BusStation/5
-        /*[ResponseType(typeof(void))]
-        public IHttpActionResult PutBusStation(int id, BusStation busStation)
+        [ResponseType(typeof(BusStation))]
+        public IHttpActionResult PutBusStation(int id, BusStationDataDTO busStationDTO)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != busStation.Id)
+            List<BusLine> busLines = new List<BusLine>(busStationDTO.BusLinesId.Count);
+            foreach (var idx in busStationDTO.BusLinesId)
             {
-                return BadRequest();
-            }
-
-            db.Entry(busStation).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BusStationExists(id))
+                var busLine = uow.BusLineRepository.Get(idx);
+                if (busLine == null)
                 {
-                    return NotFound();
+                    return BadRequest("No bus line with id: " + idx);
                 }
-                else
-                {
-                    throw;
-                }
+                busLines.Add(busLine);
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }*/
+            BusStation busStation = uow.BusStationRepository.Get(id);
+            if (busStation == null)
+            {
+                return NotFound();
+            }
+
+            busStation.Address = busStationDTO.Address;
+            busStation.Latitude = busStationDTO.Latitude;
+            busStation.Longitude = busStationDTO.Longitude;
+            busStation.Name = busStationDTO.Name;
+
+            busStation.BusLines.Clear();
+
+            foreach (var busLine in busLines)
+            {
+                busStation.BusLines.Add(busLine);
+            }
+
+            uow.Complete();
+            return Ok(busStation);
+        }
 
         // POST: api/BusStation
         [ResponseType(typeof(BusStation))]
