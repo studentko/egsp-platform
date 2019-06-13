@@ -48,7 +48,7 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            IList<BusStation> stations = GetStations(busLineDTO.BusStationIds);
+            IList<BusStation> stations = GetStations(busLineDTO.BusStations);
             if (stations == null)
             {
                 return BadRequest("Bad bus station list");
@@ -76,7 +76,7 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            IList<BusStation> stations = GetStations(busLineDTO.BusStationIds);
+            IList<BusStation> stations = GetStations(busLineDTO.BusStations);
             if (stations == null)
             {
                 return BadRequest("Bad bus station list");
@@ -91,12 +91,12 @@ namespace WebApp.Controllers
             return CreatedAtRoute("DefaultApi", new { id = busLine.Id }, busLine);
         }
 
-        private IList<BusStation> GetStations(IList<int> BusStationIds)
+        private IList<BusStation> GetStations(IList<BusStation> BusStations)
         {
             IList<BusStation> stations = new List<BusStation>();
-            foreach (var id in BusStationIds)
+            foreach (var s in BusStations)
             {
-                var station = uow.BusStationRepository.Get(id);
+                var station = uow.BusStationRepository.Get(s.Id);
                 if (station == null)
                 {
                     return null;
