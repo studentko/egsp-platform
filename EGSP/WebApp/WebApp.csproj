@@ -322,6 +322,10 @@
     <Compile Include="Migrations\201906141031475_CustomerValidationStatus.Designer.cs">
       <DependentUpon>201906141031475_CustomerValidationStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906141152526_OptimisticLocking.cs" />
+    <Compile Include="Migrations\201906141152526_OptimisticLocking.Designer.cs">
+      <DependentUpon>201906141152526_OptimisticLocking.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -485,6 +489,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906141031475_CustomerValidationStatus.resx">
       <DependentUpon>201906141031475_CustomerValidationStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906141152526_OptimisticLocking.resx">
+      <DependentUpon>201906141152526_OptimisticLocking.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

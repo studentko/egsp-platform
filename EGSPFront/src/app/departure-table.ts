@@ -7,4 +7,5 @@ export class DepartureTable {
     DepartureTimes: string
     BusLineId: number
     BusLine: Line
+    UpdateVerion: number;
 }

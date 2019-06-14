@@ -33,5 +33,7 @@ namespace WebApp.Models
         public bool IsActive { get; set; }
 
         public float Price { get; set; }
+
+        public int UpdateVersion { get; set; }
     }
 }

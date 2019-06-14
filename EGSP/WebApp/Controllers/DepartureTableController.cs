@@ -61,6 +61,12 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
+            if (dt.UpdateVersion != departureTable.UpdateVersion)
+            {
+                return BadRequest("Somebody else changed data");
+            }
+
+            dt.UpdateVersion++;
             dt.BusLineId = departureTable.BusLineId;
             dt.DayOfWeek = departureTable.DayOfWeek;
             dt.DepartureTimes = departureTable.DepartureTimes;

@@ -73,6 +73,12 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
+            if (busStation.UpdateVersion != busStationDTO.UpdateVersion)
+            {
+                return BadRequest("Somebody else changed data");
+            }
+
+            busStation.UpdateVersion++;
             busStation.Address = busStationDTO.Address;
             busStation.Latitude = busStationDTO.Latitude;
             busStation.Longitude = busStationDTO.Longitude;

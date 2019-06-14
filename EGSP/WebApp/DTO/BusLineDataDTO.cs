@@ -13,5 +13,7 @@ namespace WebApp.DTO
         public string LineNumber { get; set; }
 
         public virtual IList<BusStation> BusStations { get; set; }
+
+        public int UpdateVersion { get; set; }
     }
 }

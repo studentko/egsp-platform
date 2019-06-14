@@ -11,6 +11,8 @@ namespace WebApp.Models
     {
         public int Id { get; set; }
 
+        public int UpdateVersion { get; set; }
+
         [MaxLength(10)]
         [Index("IX_Linenumber", IsUnique = true)]
         public string LineNumber { get; set; }

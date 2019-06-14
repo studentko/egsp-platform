@@ -4,5 +4,6 @@ export class Station {
     Address: string;
     Latitude: number;
     Longitude: number;
+    UpdateVerion: number;
     BusLines: [];
 }

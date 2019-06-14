@@ -63,6 +63,11 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
+            if (busLine.UpdateVersion != busLineDTO.UpdateVersion)
+            {
+                return BadRequest("Somebody else changed data");
+            }
+
             PutBusLineData(busLine, busLineDTO, stations);
 
             uow.Complete();
@@ -112,6 +117,7 @@ namespace WebApp.Controllers
         private void PutBusLineData(BusLine line, BusLineDataDTO data, IList<BusStation> busStations)
         {
             line.LineNumber = data.LineNumber;
+            ++line.UpdateVersion;
             if(line.BusStations == null)
             {
                 line.BusStations = new List<BusStation>();

@@ -10,7 +10,7 @@ namespace WebApp.Models
     public class Ticket
     {
         public int Id { get; set; }
-        
+
         public DateTime PurchaseTime { get; set; }
 
         public DateTime? CheckinTime { get; set; }

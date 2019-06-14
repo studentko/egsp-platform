@@ -11,6 +11,8 @@ namespace WebApp.Models
     {
         public int Id { get; set; }
 
+        public int UpdateVersion { get; set; }
+
         public DayOfWeek DayOfWeek { get; set; }
 
         public string DayOfWeekString {
