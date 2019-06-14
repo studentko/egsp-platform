@@ -7,4 +7,7 @@ export class User {
     Address: string;
     Birthday: Date;
     Type: number;
+    DocumentUrl: string;
+    ValidationStatus: number;
+    ValidationStatusString: string;
 }
