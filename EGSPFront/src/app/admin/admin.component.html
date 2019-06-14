@@ -167,3 +167,29 @@
 
   </form>
 </div>
+
+<br><br>
+
+<div>
+<h3>Active prices:</h3>
+<form #activePricesForm="ngForm">
+    <div class="form-group" *ngFor="let price of priceService.prices">
+      <label>{{price.TicketTypeName}} / {{price.CustomerType.DisplayName}}</label>
+      <input class="form-control" [(ngModel)]="price.Price" name="{{price.TicketTypeName}}-{{price.CustomerType.DisplayName}}">
+    </div>
+
+    <button type="submit" class="btn btn-success"
+      (click)="savePrices()">
+      Save
+    </button>
+</form>
+</div>
+
+<br><br>
+<h3>Price history:</h3>
+<ul>
+    <li>Ticket Type / Customer Type -- Price -- Price Date -- Is Active?</li>
+    <li *ngFor="let price2 of priceService.priceHistory">
+        {{price2.TicketTypeName}} / {{price2.CustomerType.DisplayName}} -- {{price2.Price}} -- {{price2.PriceDate}} -- {{price2.IsActive}}
+    </li>
+</ul>

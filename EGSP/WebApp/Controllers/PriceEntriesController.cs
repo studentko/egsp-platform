@@ -15,6 +15,7 @@ using WebApp.Persistence.UnitOfWork;
 namespace WebApp.Controllers
 {
     [Authorize(Roles = "Admin")]
+    [RoutePrefix("api/PriceEntries")]
     public class PriceEntriesController : ApiController
     {
         private IDemoUnitOfWork uow = new DemoUnitOfWork(new ApplicationDbContext());
@@ -28,6 +29,7 @@ namespace WebApp.Controllers
         }
 
         [Route("History")]
+        [HttpGet]
         public IEnumerable<PriceEntry> GetHistoryPriceEntries()
         {
             return uow.PriceEntryRepository.GetAll();

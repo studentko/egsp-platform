@@ -5,6 +5,7 @@ import { LineService } from '../line.service';
 import { Line } from '../line';
 import { DepartureTable } from '../departure-table';
 import { DepartureTableService } from '../departure-table.service';
+import { PriceEntriesServiceService } from '../price-entries-service.service';
 
 @Component({
   selector: 'app-admin',
@@ -15,7 +16,8 @@ export class AdminComponent implements OnInit {
 
   constructor(private stationService: StationService,
     private lineService: LineService,
-    private departureTableService: DepartureTableService) { }
+    private departureTableService: DepartureTableService,
+    private priceService: PriceEntriesServiceService) { }
 
   newStation: Station = new Station();
   stationEditing: boolean;
@@ -31,11 +33,15 @@ export class AdminComponent implements OnInit {
   errMsgL: string;
   errMsgD: string;
 
+  PriceEntries: []
+
   ngOnInit() {
     this.stationService.getStations().subscribe();
     this.lineService.getLines().subscribe();
     this.newLineStations = this.stationService.stations.map(x => false);
     this.departureTableService.getTables().subscribe();
+    this.priceService.getPriceEntries().subscribe();
+    this.priceService.getPriceHistory().subscribe();
   }
 
   deleteStation(station: Station) : void {
@@ -145,5 +151,9 @@ export class AdminComponent implements OnInit {
         }
       );
     }
+  }
+
+  savePrices() : void {
+    this.priceService.setNewPrices().subscribe();
   }
 }

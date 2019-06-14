@@ -26,7 +26,7 @@ namespace WebApp.Models
         }
 
         [ForeignKey("CustomerTypeId")]
-        public CustomerType CustomerType { get; set; }
+        public virtual CustomerType CustomerType { get; set; }
 
         public int CustomerTypeId { get; set; }
 
