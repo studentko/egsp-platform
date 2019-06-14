@@ -19,6 +19,8 @@ export class AccountSettingsComponent implements OnInit {
   changeData : RegisterModel;
   errMsg2 : string;
 
+  fileToUpload: File = null;
+
   constructor(private userService: UserService, private router: Router) { }
 
   logout(): void{
@@ -60,6 +62,16 @@ export class AccountSettingsComponent implements OnInit {
     });
   }
 
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+  }
 
+  uploadFileToActivity() {
+    this.userService.postFile(this.fileToUpload).subscribe(data => {
+      this.router.navigate(['/home']);
+      }, error => {
+        console.log(error);
+      });
+  }
 
 }
