@@ -141,6 +141,7 @@ namespace WebApp.Controllers
         {
             Customer c = uow.CustomerRepository.Get(id);
             c.ValidationStatus = EValidationStatus.Valid;
+            c.Approoved = true;
             uow.Complete();
             return Request.CreateResponse(HttpStatusCode.NoContent);
         }
