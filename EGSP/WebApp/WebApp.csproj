@@ -314,6 +314,14 @@
     <Compile Include="Migrations\201906132207354_PriceInPriceLol.Designer.cs">
       <DependentUpon>201906132207354_PriceInPriceLol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906140937155_CustomerDocument.cs" />
+    <Compile Include="Migrations\201906140937155_CustomerDocument.Designer.cs">
+      <DependentUpon>201906140937155_CustomerDocument.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906141031475_CustomerValidationStatus.cs" />
+    <Compile Include="Migrations\201906141031475_CustomerValidationStatus.Designer.cs">
+      <DependentUpon>201906141031475_CustomerValidationStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -471,6 +479,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906132207354_PriceInPriceLol.resx">
       <DependentUpon>201906132207354_PriceInPriceLol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906140937155_CustomerDocument.resx">
+      <DependentUpon>201906140937155_CustomerDocument.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906141031475_CustomerValidationStatus.resx">
+      <DependentUpon>201906141031475_CustomerValidationStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

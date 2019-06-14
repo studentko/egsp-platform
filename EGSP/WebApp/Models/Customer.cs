@@ -45,5 +45,36 @@ namespace WebApp.Models
         [JsonIgnore]
         public virtual List<Ticket> Tickets { get; set; }
 
+        [JsonIgnore]
+        public string DocumentPath { get; set; }
+
+        [NotMapped]
+        public string DocumentUrl
+        {
+            get
+            {
+                string file = DocumentPath.Substring(DocumentPath.LastIndexOf('\\') + 1);
+                return "http://localhost:52295/api/Customer/DocumentUrl?id=" + file;
+            }
+        }
+
+        public EValidationStatus ValidationStatus { get; set; }
+
+        [NotMapped]
+        public string ValidationStatusString
+        {
+            get
+            {
+                return ValidationStatus.ToString();
+            }
+        }
+    }
+
+    public enum EValidationStatus
+    {
+        NotValidated,
+        Validating,
+        Valid,
+        Denied
     }
 }
