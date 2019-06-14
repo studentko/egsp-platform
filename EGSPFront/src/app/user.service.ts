@@ -31,17 +31,17 @@ export class UserService {
   }
 
   getUserInfo() : void {
-    this.httpClient.get<String[]>('http://localhost:52295/api/Account/Roles', {headers: this.tokenHeader})
+    this.httpClient.get<string[]>('http://localhost:52295/api/Account/Roles', {headers: this.tokenHeader})
     .subscribe(data => {
-      if(data[0] == 'Admin'){
-        this.activeUser.Role = "Admin";
-        this.httpClient.get<any>('http://localhost:52295/api/Account/UserInfo', {headers: this.tokenHeader})
-        .subscribe(data => this.activeUser.Email = data.Email);
-      }
-      else{
+      if(data[0] == 'AppUser'){
         this.activeUser.Role = "AppUser";
         this.httpClient.get<any>('http://localhost:52295/api/Customer', {headers: this.tokenHeader})
         .subscribe(data => Object.assign(this.activeUser, data));
+      }
+      else{
+        this.activeUser.Role = data[0];
+        this.httpClient.get<any>('http://localhost:52295/api/Account/UserInfo', {headers: this.tokenHeader})
+        .subscribe(data => this.activeUser.Email = data.Email);
       }
     })
   }

@@ -1,12 +1,10 @@
 <h1>Welcome to the EGSP website!</h1>
 
 
-<div *ngIf='this.userService.activeUser'>
-    <div *ngIf='this.userService.activeUser.Role == "AppUser"'>
-        <app-ticket-buying></app-ticket-buying>
-        <hr/>
-        <app-tickets></app-tickets>
-        <hr/>
-    </div>  
+<div *ngIf='this.userService.activeUser && this.userService.activeUser.Role == "AppUser"'>
+    <app-ticket-buying></app-ticket-buying>
+    <hr/>
+    <app-tickets></app-tickets>
+    <hr/>
 </div>
 <app-schedule></app-schedule>
