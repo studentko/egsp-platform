@@ -21,6 +21,7 @@ namespace WebApp.Controllers
         public IEnumerable<Ticket> Get()
         {
             Customer customer = GetCustomer();
+            if (customer == null) return new List<Ticket>();
             return customer.Tickets;
         }
 

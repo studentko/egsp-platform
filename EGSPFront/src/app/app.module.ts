@@ -13,6 +13,7 @@ import { TicketBuyingComponent } from './ticket-buying/ticket-buying.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { AdminComponent } from './admin/admin.component';
+import { ControllerComponent } from './controller/controller.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AdminComponent } from './admin/admin.component';
     TicketBuyingComponent,
     TicketsComponent,
     ScheduleComponent,
-    AdminComponent
+    AdminComponent,
+    ControllerComponent
   ],
   imports: [
     BrowserModule,
