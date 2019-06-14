@@ -15,18 +15,21 @@ using WebApp.Persistence.UnitOfWork;
 
 namespace WebApp.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class BusLineController : ApiController
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
         IDemoUnitOfWork uow = new DemoUnitOfWork(new ApplicationDbContext());
 
         // GET: api/BusLine
+        [AllowAnonymous]
         public IEnumerable<BusLine> GetBusLines()
         {
             return uow.BusLineRepository.GetAll();
         }
 
         // GET: api/BusLine/5
+        [AllowAnonymous]
         [ResponseType(typeof(BusLine))]
         public IHttpActionResult GetBusLine(int id)
         {
