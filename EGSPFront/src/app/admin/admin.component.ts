@@ -33,6 +33,8 @@ export class AdminComponent implements OnInit {
   errMsgL: string;
   errMsgD: string;
 
+  tab: number = 1;
+
   PriceEntries: []
 
   ngOnInit() {
@@ -133,6 +135,7 @@ export class AdminComponent implements OnInit {
   }
 
   addOrEditTable() : void {
+    this.newTable.BusLineId=this.newTable.BusLine.Id;
     if(!this.tableEditing){
       this.departureTableService.addTable(this.newTable).subscribe(
         data => {
