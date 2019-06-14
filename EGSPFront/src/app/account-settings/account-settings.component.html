@@ -76,3 +76,16 @@
          (click)="updateInfo()">Update</button>
     
       </form>
+
+
+      <br>
+      Current documnet: <img src="{{this.userService.activeUser.DocumentUrl}}" width="150">
+      <div class="form-group">
+        <label for="file">Choose Document File</label>
+        <input type="file"
+               id="file"
+               (change)="handleFileInput($event.target.files)">
+        <button type="submit" class="btn btn-success"
+               [disabled]="!updateInfoForm.form.valid"
+               (click)="uploadFileToActivity()">Upload new document id</button>
+    </div>

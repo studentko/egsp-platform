@@ -97,6 +97,18 @@ export class UserService {
       }));
   }
 
+  postFile(fileToUpload: File): Observable<any> {
+    const endpoint = 'http://localhost:52295/api/Customer/Document';
+    const formData: FormData = new FormData();
+    formData.append('fileKey', fileToUpload, fileToUpload.name);
+    return this.httpClient
+      .post(endpoint, formData, {headers: this.tokenHeader})
+      .pipe(
+        catchError((err : HttpErrorResponse) => {
+          return of(err);
+        }));
+}
+
   //TODO add http request
   logout() : void {
     this.activeUser = null;

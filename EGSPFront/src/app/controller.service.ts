@@ -15,7 +15,7 @@ export class ControllerService {
 
   checkTicket(ticket: Ticket) : Observable<any> {
     return this.httpClient.post<any>('http://localhost:52295/api/Ticket/TicketCheck', 
-    {TicketId: ticket.ID, AnonymousCustomerId: ticket.AnonymousCustomerId}, {headers: this.userService.tokenHeader})
+    {TicketId: ticket.Id, AnonymousCustomerId: ticket.AnonymousCustomerId}, {headers: this.userService.tokenHeader})
     .pipe(
       catchError((err: HttpErrorResponse) => {
         return of({IsValid: false, Message: "Server/connection error, try again later"});
