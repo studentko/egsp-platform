@@ -33,6 +33,28 @@ namespace WebApp.Models
         public Customer Customer { get; set; }
 
         public string AnonymousCustomerId { get; set; }
+
+        [NotMapped]
+        public bool IsExpired
+        {
+            get
+            {
+                if (CheckinTime == null) return false;
+                switch(TicketType)
+                {
+                    case TicketType.OneHour:
+                        TimeSpan span = DateTime.Now - CheckinTime.Value;
+                        return span > TimeSpan.FromHours(1);
+                    case TicketType.Daily:
+                        return CheckinTime.Value.Day != DateTime.Now.Day;
+                    case TicketType.Monthly:
+                        return CheckinTime.Value.Month != DateTime.Now.Month;
+                    case TicketType.Yearly:
+                        return CheckinTime.Value.Year != DateTime.Now.Year;
+                }
+                return false;
+            }
+        }
     }
 
     public enum TicketType

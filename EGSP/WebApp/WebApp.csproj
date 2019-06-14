@@ -276,6 +276,7 @@
     <Compile Include="DTO\CustomerUpdateDTO.cs" />
     <Compile Include="DTO\DepartureTableDTO.cs" />
     <Compile Include="DTO\TicketBuyReturn.cs" />
+    <Compile Include="DTO\TicketCheckDTO.cs" />
     <Compile Include="DTO\TicketCheckinReturn.cs" />
     <Compile Include="DTO\TicketPurchaseData.cs" />
     <Compile Include="Global.asax.cs">
@@ -324,6 +325,7 @@
     <Compile Include="Models\DepartureTable.cs" />
     <Compile Include="Models\PriceEntry.cs" />
     <Compile Include="Models\Ticket.cs" />
+    <Compile Include="Models\TicketCheckReturn.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Persistence\Repository\BusLineRepository.cs" />
     <Compile Include="Persistence\Repository\BusStationRepository.cs" />
