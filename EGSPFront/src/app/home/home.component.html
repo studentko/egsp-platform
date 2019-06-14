@@ -1,7 +1,7 @@
 <h1>Welcome to the EGSP website!</h1>
 
 
-<div *ngIf='this.userService.activeUser && this.userService.activeUser.Role == "AppUser"'>
+<div *ngIf='(this.userService.activeUser && this.userService.activeUser.Role == "AppUser") || !this.userService.activeUser'>
     <app-ticket-buying></app-ticket-buying>
     <hr/>
     <app-tickets></app-tickets>

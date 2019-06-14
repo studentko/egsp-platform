@@ -4,7 +4,11 @@
     <div class="card mb-3" style="width: 15rem">
       <div class="card-body">
         <h5 class="card-title">{{ticket.TicketTypeString}}</h5>
+        ID: {{ticket.Id}}<br/>
         <p class="card-text">Purchased:<br/> {{ticket.PurchaseTime  | date:'short' }}<br/>
+          <span *ngIf="ticket.AnonymousCustomerId">
+            Anon ID:<br/> {{ticket.AnonymousCustomerId}}
+          </span>
           <span *ngIf="ticket.CheckinTime">
             Checked:<br/> {{ticket.CheckinTime | date:'short' }}
           </span>
