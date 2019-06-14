@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Ticket } from '../models/ticket';
 import { ControllerService } from '../controller.service';
 import { of } from 'rxjs';
+import { User } from '../user';
 
 @Component({
   selector: 'app-controller',
@@ -18,6 +19,7 @@ export class ControllerComponent implements OnInit {
   passMsg: string;
 
   ngOnInit() {
+    this.controllerService.getPendingUsers().subscribe();
   }
 
   checkTicket(): void{
@@ -30,6 +32,18 @@ export class ControllerComponent implements OnInit {
         this.passMsg = null;
         this.errMsg = data.Message;
       }
+    });
+  }
+
+  confirm(user: User) : void {
+    this.controllerService.confirmUser(user.Id).subscribe(x => {
+      this.controllerService.getPendingUsers().subscribe();
+    });
+  }
+
+  deny(user: User) : void {
+    this.controllerService.denyUser(user.Id).subscribe(x => {
+      this.controllerService.getPendingUsers().subscribe();
     });
   }
 }

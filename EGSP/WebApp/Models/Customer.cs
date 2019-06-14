@@ -53,6 +53,7 @@ namespace WebApp.Models
         {
             get
             {
+                if (DocumentPath == null) return "";
                 string file = DocumentPath.Substring(DocumentPath.LastIndexOf('\\') + 1);
                 return "http://localhost:52295/api/Customer/DocumentUrl?id=" + file;
             }
