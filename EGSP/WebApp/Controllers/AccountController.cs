@@ -88,6 +88,10 @@ namespace WebApp.Controllers
             {
                 Roles.Add("Controller");
             }
+            if (Roles.Count == 0)
+            {
+                Roles.Add("AppUser");
+            }
 
             return Roles;
         }
